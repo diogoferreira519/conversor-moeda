@@ -3,6 +3,7 @@ import { ModelConversor } from '../model/model.conversor.js';
 import { ValidacaoError } from '../errors/error.validation.js';
 import { ExternoApiErro } from '../errors/error.api.js';
 import { ServiceConversor } from '../services/service.conversor.js';
+import axios from 'axios';
 
 export class ControllerConversor {
 
@@ -13,11 +14,14 @@ export class ControllerConversor {
             const modelConversor = new ModelConversor(de, para, valor);
 
             await new ServiceConversor(modelConversor).converter();
-            
+
             return res.status(200).json(modelConversor)
 
         }
         catch (error: unknown) {
+            if (axios.isAxiosError(error)) {
+                return res.status(error.response?.status ?? 401).send(error.response?.data)
+            }
             if (error instanceof ValidacaoError) {
                 return res.status(400).json({ error: error.message });
             }

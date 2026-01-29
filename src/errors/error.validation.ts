@@ -1,1 +1,1 @@
-export class ValidacaoError extends Error{}
+export class ValidacaoError extends Error { }
