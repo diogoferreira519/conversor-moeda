@@ -1,0 +1,1 @@
+export class ExternoApiErro extends Error {}
