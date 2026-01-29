@@ -17,13 +17,18 @@ export class ModelConversor {
     this.validaMoeda(moedaDestino);
     if (!valor || valor == null) {
       throw new ValidacaoError('Valor não pode estar em branco ou ser nulo')
-    }
-    if (valor <= 0) {
+    } else if (valor <= 0) {
       throw new ValidacaoError('Valor deve ser maior que zero');
+    } else if (typeof valor !== 'number' || isNaN(valor)) {
+      throw new ValidacaoError('Valor deve ser um número válido');
     }
 
     this.moedaOrigem = moedaOrigem.toUpperCase();
     this.moedaDestino = moedaDestino.toUpperCase();
+
+    if (this.moedaDestino === this.moedaOrigem) {
+      throw new ValidacaoError('Moeda de origem e destino não podem ser iguais');
+    }
     this.valor = valor;
     this.valorConvertido = valorConvertido;
   }
@@ -58,7 +63,7 @@ export class ModelConversor {
   }
 
   private validaMoeda(moeda: string): void {
-    if (!moeda || moeda.length !== 3) {
+    if (!moeda || moeda.length !== 3 || !/^[A-Z]{3}$/i.test(moeda)) {
       throw new ValidacaoError(`Moeda inválida: ${moeda}`);
     }
   }
