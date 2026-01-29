@@ -1,11 +1,13 @@
 import { Router } from 'express';
-import { conversorController } from '../controllers/controller.conversor.js';
+import { ControllerConversor } from '../controllers/controller.conversor.js';
 //import { convertController } from '../controllers/convert.controller.js';
 
 const router = Router();
 
-router.get('/conversor', conversorController);
+const controller = new ControllerConversor();
 
-router.post('/conversor', conversorController);
+router.get('/conversor', controller.conversorController);
+
+router.post('/conversor', controller.conversorController);
 
 export default router;

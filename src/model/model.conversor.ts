@@ -14,7 +14,9 @@ export class ModelConversor {
   ) {
     this.validaMoeda(moedaOrigem);
     this.validaMoeda(moedaDestino);
-
+    if (!valor || valor == null) {
+      throw new ValidacaoError('Valor não pode estar em branco ou ser nulo')
+    }
     if (valor <= 0) {
       throw new ValidacaoError('Valor deve ser maior que zero');
     }
@@ -42,8 +44,8 @@ export class ModelConversor {
     return this.valorConvertido;
   }
 
-  public setValorConvertido(valor: number): void {
-    this.valorConvertido = valor;
+  public setValorConvertido(valorConvertido: number): void {
+    this.valorConvertido = valorConvertido;
   }
 
   private validaMoeda(moeda: string): void {
