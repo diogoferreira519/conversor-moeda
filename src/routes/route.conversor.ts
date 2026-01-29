@@ -6,8 +6,6 @@ const router = Router();
 
 const controller = new ControllerConversor();
 
-router.get('/conversor', controller.conversorController);
-
 router.post('/conversor', controller.conversorController);
 
 export default router;

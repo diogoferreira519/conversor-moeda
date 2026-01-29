@@ -17,7 +17,7 @@ export class ControllerConversor {
             return res.status(200).json(modelConversor)
 
         }
-        catch (error) {
+        catch (error: unknown) {
             if (error instanceof ValidacaoError) {
                 return res.status(400).json({ error: error.message });
             }
@@ -26,7 +26,7 @@ export class ControllerConversor {
                 return res.status(503).json({ error: error.message });
             }
 
-            return res.status(500).json({ error: 'Erro interno do servidor' });
+            return res.status(500).json({ error: error.message ?? 'Erro interno do servidor' });
         }
     }
 }

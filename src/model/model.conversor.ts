@@ -5,6 +5,7 @@ export class ModelConversor {
   private moedaDestino: string;
   private valor: number;
   private valorConvertido?: number;
+  private fonteDado?: string;
 
   constructor(
     moedaOrigem: string,
@@ -46,6 +47,14 @@ export class ModelConversor {
 
   public setValorConvertido(valorConvertido: number): void {
     this.valorConvertido = valorConvertido;
+  }
+
+  public getFonteDado() {
+    return this.fonteDado;
+  }
+
+  public setFonteDado(fonteDado: string) {
+    this.fonteDado = fonteDado;
   }
 
   private validaMoeda(moeda: string): void {
